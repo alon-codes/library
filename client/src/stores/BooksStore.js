@@ -1,14 +1,19 @@
 import { observable, runInAction, action, transaction } from 'mobx';
 import axios from 'axios';
 import { SERVER_URL } from "../Config";
+import { getDateStr } from "../Helpers";
 
 class BooksStore {
     books = observable([]);
     isOpen = observable.box(false);
-    currentBook = observable.map({});
+    isEditingMode = observable.box(false);
+    currentBook = observable({});
 
     constructor(){
         this.getData();
+        this.isOpen.observe((change) => {
+            console.log(`Is open value is changed`, change);
+        })
     }
 
     static sortBooks(b1, b2){
@@ -23,7 +28,11 @@ class BooksStore {
             if (res.data.hasOwnProperty("result")) {
                 transaction(() => {
                     const sortedBooks = res.data.result.sort(BooksStore.sortBooks);
-                    this.books.replace(sortedBooks);
+                    const convertedBooks = sortedBooks.map((book) => {
+                        book.date = getDateStr(new Date(book.date))
+                        return book;
+                    });
+                    this.books.replace(convertedBooks);
                 });
             }
         });
@@ -37,30 +46,36 @@ class BooksStore {
         return sameTitleIndex < 0;
     }
 
-    editBook = (book) => {
+    saveBookChanges = (book) => {
         if(book.bookId.length === 0)
             return this.addNewBook(book.title, book.date);
 
         const bookIndex = this.books.findIndex((b) => b.bookId === book.bookId);
         transaction(() => {
             this.books[bookIndex] = book;
-            this.isOpen = observable(false);
+            this.isOpen.set(false);
         });
     }
 
-    editMode = (book) => {
+    enterEditMode = (book, isCreation) => {
         transaction(() => {
             this.isOpen.set(true);
-            this.currentBook.replace(book);
-            console.log(`Entering book edit mode - see object -`, this.isOpen);
+            this.currentBook = book;
+            this.isEditingMode.set(!isCreation);
         });
     }
 
-    exitEditMode(){
-        this.isOpen.set(false);
+    exitEditMode = () => {
+        transaction(() => {
+            this.isOpen.set(false);
+            if(!this.isEditingMode.get()){
+                this.isEditingMode.set(false);
+            }
+        });
     }
 
     addNewBook(bookTitle, bookDate){
+        // TODO: check this function, probably need to refactor
         const booksArrLength = this.books.length;
         const lastBookId = this.books[booksArrLength - 1].bookId;
 
@@ -70,11 +85,9 @@ class BooksStore {
             title: bookTitle
         };
 
-        runInAction(() => {
+        transaction(() => {
             this.books.replace(this.books.push(nBook));
         });
-
-        this.editMode(nBook);
 
     }
 }

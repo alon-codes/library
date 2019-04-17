@@ -7,9 +7,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import BooksList from './BooksList';
 import Credit from './Credit';
 import {inject, observer} from "mobx-react";
-import AddBook from "./buttons/AddBook";
 import Header from './Header';
-import BookModal from './BookModal';
+import BookModalHOC from './hoc/BookModalHOC';
 
 const theme = createMuiTheme({
     overrides: {
@@ -17,6 +16,9 @@ const theme = createMuiTheme({
         MuiButton: {
 
         }
+    },
+    typography: {
+        useNextVariants: true,
     },
 });
 
@@ -27,10 +29,10 @@ class App extends Component {
                 <Header />
                 <BooksList />
                 <Credit />
-                <BookModal />
+                <BookModalHOC />
             </MuiThemeProvider>
         );
     }
 }
 
-export default App;
+export default observer(App);

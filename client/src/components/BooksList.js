@@ -10,7 +10,7 @@ class BooksList extends Component {
         super(props);
 
         this.state = {
-            books: this.props.BooksStore.books
+            books: this.props.booksStore.books
         };
 
         this.openEditBox = this.openEditBox.bind(this);
@@ -21,12 +21,12 @@ class BooksList extends Component {
         console.log(props);
 
         this.setState({
-            books: props.BooksStore.books.toJS()
+            books: props.booksStore.books.toJS()
         });
     }
 
     openEditBox(book){
-        this.props.BooksStore.editMode(book);
+        this.props.booksStore.enterEditMode(book);
     }
 
     handleSingleBook(singleBook){
@@ -60,6 +60,6 @@ class BooksList extends Component {
     }
 }
 
-const booksListWithStore = inject("BooksStore")(observer(BooksList));
+const booksListWithStore = inject("booksStore")(observer(BooksList));
 
 export default booksListWithStore;

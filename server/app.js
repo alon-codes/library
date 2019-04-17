@@ -16,7 +16,7 @@ app.get("/books", function (req, res) {
             {
                 bookId: "1",
                author: "JK Rolling",
-               date: new Date(),
+               date: new Date(948037216000),
                title: "Harry Potter"
             },
             {

@@ -1,5 +1,7 @@
-export const formatDate = (date) => {
-    return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
+import moment from 'moment';
+
+export const getDateStr = (date) => {
+    return moment(date).format('D/MM/YYYY');
 };
 
 export const isValidDateStr = (str) => {

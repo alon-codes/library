@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-
-import {formatDate, isValidDateStr} from "../Helpers";
-import {inject, observer} from "mobx-react";
-import { Paper } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
 import { withStyles } from "@material-ui/core/styles";
+import moment from 'moment';
+import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@material-ui/core';
+
+import { isValidDateStr } from '../Helpers';
 
 const getModalStyle = () => {
     const top = 50;
@@ -21,46 +20,41 @@ const getModalStyle = () => {
 };
 
 const styles = theme => ({
-    paper: {
-        position: 'absolute',
-        width: theme.spacing.unit * 100,
-        height: 500,
-        display: 'flex',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        paddingLeft: theme.spacing.unit * 4,
-        paddingRight: theme.spacing.unit * 4,
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-    },
+    dialogField: {
+        marginBottom: 40
+    }
 });
 
+const bookModalTitles = {
+    ADD: "Fill-out book details",
+    EDIT: "Change book details"
+};
+
 class BookModal extends Component {
+
+    static propTypes = {
+    }
+
     constructor(props){
         super(props);
 
-        const { BooksStore } = this.props;
-
         this.state = {
             isOpen: false,
+            isEditingMode: false,
             currentBook: null,
             errors: this.props.errors,
             titleError: "",
             dateError: ""
         };
 
-        this.save = this.save.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
         let nextState = {};
-        const { BooksStore } = nextProps;
-        
-        // Extract value from the observable
-        const isOpen = BooksStore.isOpen.get();
-        const currentBook = BooksStore.currentBook.get();
+        console.log(`BookModal new props - `, nextProps);
+        const { isOpen, currentBook, isEditingMode } = nextProps;
 
         if(isOpen !== prevState.isOpen){
             nextState.isOpen = isOpen;
@@ -70,13 +64,17 @@ class BookModal extends Component {
             nextState.currentBook = currentBook;
         }
 
+        if(isEditingMode != prevState.isEditingMode){
+            nextState.isEditingMode = isEditingMode;
+        }
+
         return nextState;
     }
 
     save(){
 
         const { currentBook } = this.state;
-        const { BooksStore } = this.props;
+        const { booksStore } = this.props;
 
         let isValid = true;
 
@@ -85,7 +83,7 @@ class BookModal extends Component {
                 prevState.titleError = "Title can't be empty"
             });
             isValid = false;
-        } else if(BooksStore.isTitleExists(currentBook.title)){
+        } else if(booksStore.isTitleExists(currentBook.title)){
             this.setState(prevState => {
                 prevState.titleError = "Title already exists, try another"
             });
@@ -105,7 +103,7 @@ class BookModal extends Component {
         }
 
         if(isValid)
-            BooksStore.editBook(currentBook);
+            booksStore.editBook(currentBook);
     }
 
     handleTitleChange(e){
@@ -126,54 +124,75 @@ class BookModal extends Component {
         this.setState(prevState => prevState.currentBook.date = nVal);
     }
 
-    close(){
-        this.props.BooksStore.exitEditMode();
-    }
-
     render(){
-
-        console.log(`Modal received store props`,this.props.BooksStore);
         const {
             titleError,
             dateError,
             isOpen,
-            currentBook = { date: new Date(), title: "" }
+            isEditingMode
         } = this.state;
 
-        const { date,title } = this.state.currentBook;
-
-        const dateStr = formatDate(date);
+        const { onClose,onSave,classes } = this.props;
+        
+        console.log(`BookModal::Is modal open - `,isOpen);
+        console.log(`BookModal::Is editing mode - `,isEditingMode);
 
         let titleErrorEle = null;
         let dateErrorEle = null;
+        
+        if (titleError.length > 0) {
+            titleErrorEle = <span>{titleError}</span>;
+        }
 
-        if(titleError.length > 0)
-            titleErrorEle = <span>{ titleError }</span>;
+        if (dateError.length > 0) {
+            dateErrorEle = <span>{dateError}</span>;
+        }
 
-        if(dateError.length > 0)
-            dateErrorEle = <span>{ dateError }</span>;
+        let bookTitle, date, title, author = "";
 
-        console.log(`Modal opening status: ${isOpen}`);
+        const { currentBook } = this.state;
+
+        if(isEditingMode){
+            bookTitle = currentBook.title;
+            date = new Date(currentBook.date);
+            author = currentBook.author;
+            title = bookModalTitles.EDIT;
+        } else {
+            bookTitle = "Untitled Book";
+            date = new Date(); 
+            author = "Unknown";
+            title = bookModalTitles.ADD;
+        }
+        
+        const dateStr = moment(date).format("YYYY-MM-D");
+
+        console.log(`BookModal/render::dateStr`,dateStr);
 
         return (
-            <Modal open={isOpen}>
-                <div style={getModalStyle()} className={this.props.classes.paper}>
-                    <Grid container>
-                        <Grid item>
-                            Edit book title
-                        </Grid>                    
-                        <input value={title} onChange={this.handleTitleChange} name="title" id="title" placeholder="Name the book" />
-                        { titleErrorEle }
-                        <input value={dateStr} onChange={this.handleDateChange} type="text" id="date" name="date" placeholder="dd/mm/yyyy" />
-                        { dateErrorEle }
-                        <Button onClick={this.save}>Save</Button>{' '}
-                        <Button onClick={this.close.bind(this)}>Cancel</Button>
+            <Dialog fullWidth onExited={onClose} onClose={onClose} open={isOpen}>
+                <DialogTitle>{title}</DialogTitle>
+                <DialogContent>
+                    <Grid container>   
+                        <Grid xs={12} item>        
+                            <TextField className={classes.dialogField} fullWidth value={bookTitle} onChange={this.handleTitleChange} label="Book title" />
+                            { titleErrorEle }
+                            <TextField className={classes.dialogField} fullWidth value={author} onChange={this.handleTitleChange} label="Book author" />
+                            <TextField
+                                className={classes.dialogField} fullWidth
+                                defaultValue={dateStr} type="date"
+                                label="Book release date"
+                                InputLabelProps={{ shrink: true }}  />
+                            { dateErrorEle }
+                        </Grid>
                     </Grid>
-                </div>
-            </Modal>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => onSave(currentBook)}>Save</Button>
+                    <Button onClick={onClose}>Cancel</Button>
+                </DialogActions>
+            </Dialog>
         );
     }
 }
 
-const modalWithStore = inject("BooksStore")(observer(BookModal));
-export default withStyles(styles)(modalWithStore);
+export default withStyles(styles)(BookModal);

@@ -19,15 +19,13 @@ export default class BookItem extends Component {
     render(){
 
         const { title, date, author, onEdit } = this.props;
-        // TODO: convert date object to pretty string
-        const dateStr = formatDate(new Date(date));
 
         return (
             <Card className="book-item">
                 <CardContent>
                     <Typography>{title}</Typography>
                     <Typography>{author}</Typography>
-                    <Typography>{dateStr}</Typography>
+                    <Typography>{date}</Typography>
                     <CardActions>
                         <EditBook onClick={onEdit} />
                     </CardActions>
