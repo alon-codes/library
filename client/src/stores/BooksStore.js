@@ -17,7 +17,29 @@ class BooksStore {
     }
 
     static sortBooks(b1, b2){
-        return b1.bookId.localeCompare(b2.bookId);
+        return b1.id.localeCompare(b2.id);
+    }
+
+    setBooks = (nBooks) => {
+        transaction(() => {
+            const sortedBooks = nBooks.sort(BooksStore.sortBooks);
+            const convertedBooks = sortedBooks.map((book) => {
+                book.date = getDateStr(new Date(book.date))
+                return book;
+            });
+            this.books.replace(convertedBooks);
+        });
+    }
+
+    /**
+     * Making request to the server
+     */
+    searchBooks = (searchTerm) => {
+        axios.get(`${SERVER_URL}/books/${searchTerm}`).then(res => {
+            if (Array.isArray(res.data)) {
+                this.setBooks(res.data);
+            }
+        });
     }
 
     /**
@@ -25,15 +47,8 @@ class BooksStore {
      */
     getData = () => {
         axios.get(SERVER_URL + "/books").then(res => {
-            if (res.data.hasOwnProperty("result")) {
-                transaction(() => {
-                    const sortedBooks = res.data.result.sort(BooksStore.sortBooks);
-                    const convertedBooks = sortedBooks.map((book) => {
-                        book.date = getDateStr(new Date(book.date))
-                        return book;
-                    });
-                    this.books.replace(convertedBooks);
-                });
+            if (Array.isArray(res.data)) {
+                this.setBooks(res.data);
             }
         });
     }
@@ -50,7 +65,7 @@ class BooksStore {
         if(book.bookId.length === 0)
             return this.addNewBook(book.title, book.date);
 
-        const bookIndex = this.books.findIndex((b) => b.bookId === book.bookId);
+        const bookIndex = this.books.findIndex((b) => b.id === book.id);
         transaction(() => {
             this.books[bookIndex] = book;
             this.isOpen.set(false);
@@ -77,16 +92,14 @@ class BooksStore {
     addNewBook(bookTitle, bookDate){
         // TODO: check this function, probably need to refactor
         const booksArrLength = this.books.length;
-        const lastBookId = this.books[booksArrLength - 1].bookId;
 
         const nBook = {
-            bookId: parseInt(lastBookId) + 1,
             date: bookDate,
             title: bookTitle
         };
 
         transaction(() => {
-            this.books.replace(this.books.push(nBook));
+            this.books.push(nBook);
         });
 
     }

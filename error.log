@@ -1,0 +1,4 @@
+{"message":"Cannot fetch books TypeError: books.map is not a function","level":"error","service":"user-service"}
+{"message":"Cannot fetch books ReferenceError: BookModel is not defined","level":"error","service":"user-service"}
+{"message":"Cannot fetch books ReferenceError: BookModel is not defined","level":"error","service":"user-service"}
+{"service":"user-service","level":"error","message":"Error delete book with the id"}

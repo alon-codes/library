@@ -1,0 +1,125 @@
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"message":"Cannot fetch books TypeError: books.map is not a function","level":"error","service":"user-service"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"message":"Cannot fetch books ReferenceError: BookModel is not defined","level":"error","service":"user-service"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"error","message":"Error delete book with the id"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Application is running on port "}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}
+{"service":"user-service","level":"info","message":"Fetching books"}

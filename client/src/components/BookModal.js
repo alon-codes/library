@@ -179,7 +179,7 @@ class BookModal extends Component {
                             <TextField className={classes.dialogField} fullWidth value={author} onChange={this.handleTitleChange} label="Book author" />
                             <TextField
                                 className={classes.dialogField} fullWidth
-                                defaultValue={dateStr} type="date"
+                                value={dateStr} type="date"
                                 label="Book release date"
                                 InputLabelProps={{ shrink: true }}  />
                             { dateErrorEle }

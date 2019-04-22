@@ -1,10 +1,14 @@
 import React from 'react';
+import { Typography, Icon } from '@material-ui/core';
 
 const credits =(props) => {
     return (
-       <div>
-           Created by <a href="https://github.com/alond2010">alond2010</a>
-       </div>
+       <Typography>
+           Source code can be found on
+           <a href="https://github.com/alond2010">
+                <Icon type="github-circle" />
+           </a>
+       </Typography>
     )
 };
 
