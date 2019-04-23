@@ -2,41 +2,6 @@ import logger from "../providers/Logger.mjs";
 import Book from "../models/BookModel.mjs";
 import BooksService from "../services/BooksService.mjs";
 
-const mockedData = {
-    result: [
-         {
-            bookId: "1",
-            author: "JK Rolling",
-            date: new Date(948037216000),
-            title: "Harry Potter"
-         },
-         {
-             bookId: "2",
-            author: "C. S. Lewis",
-            date: new Date(),
-            title: "Narnia"
-         },
-         {
-             bookId: "3",
-            author: "Alexandre Dumas",
-            date: new Date(),
-            title: "The Three Musketeers"
-         },
-        {
-            bookId: "4",
-            author: "Robert Louis Stevenson",
-            date: new Date(),
-            title: "Treasure Island"
-        },
-        {
-            bookId: "5",
-            author: "Alice\'s Adventures in Wonderland",
-            date: new Date(),
-            title: "Lewis Carroll"
-        },
-    ]
-};
-
 export default class BooksController {
 
     /**
@@ -45,7 +10,7 @@ export default class BooksController {
      * the searchTerm
      */
     async getBooks(req, res){
-        const searchTerm = req.params.searchTerm;    
+        const searchTerm = req.params.searchTerm;
         try {
             let books = [];
             const booksService = new BooksService();
@@ -97,9 +62,15 @@ export default class BooksController {
      */
     async deleteBook(req, res){
         const { id } = req.params;
+
+        if(!id){
+            return res.status(400).send({error: Errors.MISSING_ID});
+        }
+
         const booksService = new BooksService();
         const result = await booksService.deleteBook(id);
-        if(result === false){
+
+        if(!result){
             return res.status(400).send();
         }
 

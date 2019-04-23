@@ -21,6 +21,9 @@ export default class BooksService {
         }   
     };
     
+    /**
+     * Get recent books from elasticsearch
+     */
     async getRecent(){
         try {
             const result = await elasticClient.search({
@@ -40,6 +43,9 @@ export default class BooksService {
         }
     };
 
+    /**
+     * Find books from elasticsearch
+     */
     async findBooks(searchTerm){
         try {
             const result = await elasticClient.search({
@@ -56,9 +62,12 @@ export default class BooksService {
         }
     };
 
+    /**
+     * Delete's book from elasticsearch
+     */
     async deleteBook(id){
         try {
-            const reuslt = await elasticClient.delete({
+            await elasticClient.delete({
                 index: booksIndexName,
                 id: id
             });

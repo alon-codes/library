@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-import BooksList from './BooksList';
 import Credit from './Credit';
-import {inject, observer} from "mobx-react";
-import Header from './Header';
+import {observer} from "mobx-react";
+import Header from './header/Header';
 import BookModalHOC from './hoc/BookModalHOC';
+import LibraryRoute from '../routes/LibraryRoute';
+import AboutRoute from '../routes/AboutRoute';
+import CodeRoute from '../routes/CodeRoute';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import routes from '../Routes';
 
 const theme = createMuiTheme({
     overrides: {
@@ -26,10 +26,16 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <Header />
-                <BooksList />
+                <Router>
+                    <Header />
+                    <React.Fragment>
+                        <Route exact path={routes.LIBRARY} component={LibraryRoute} />
+                        <Route exact path={routes.ABOUT} component={AboutRoute} />
+                        <Route exact path={routes.CODE} component={CodeRoute} />
+                    </React.Fragment>
+                </Router>
                 <Credit />
-                <BookModalHOC />
+                <BookModalHOC />                
             </MuiThemeProvider>
         );
     }
